@@ -1,8 +1,8 @@
 var koa = require('koa')
-  , request = require('request-promise').defaults({json:true})
   , bodyParser = require('koa-bodyparser')
   , json = require('koa-json')
   , router = require('./lib/router')
+  , request = require('./lib/middleware/api-middleware')
   , validator = require('koa-validator')
   , oneerror = require('koa-onerror');
 
@@ -18,10 +18,9 @@ app.use(bodyParser());
 app.use(validator());
 
 // app middleware
-app.use(function *(next) {
-  this.api = request;
-  yield next;
-});
+app.use(request({
+  baseUrl: "http://localhost:4000"
+}));
 
 // routes
 var routes = router( __dirname + '/controller');
