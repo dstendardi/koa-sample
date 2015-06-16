@@ -24,6 +24,7 @@ describe('app', function () {
       request
         .get('/')
         .set('Accept', 'application/json')
+        .query({foo: 'bar'})
         .expect('Content-Type', /json/)
         .expect(200)
         .expect({
@@ -34,6 +35,25 @@ describe('app', function () {
             "bar": "foo"
           }
         }, done);
-    })
+    });
+
+    it('should return an error when parameter foo is empty', function (done) {
+
+      request
+        .get('/')
+        .query({foo: ''})
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect({
+          "errors": [
+            {
+              "msg": "Invalid value",
+              "param": "foo",
+              "value": ""
+            }
+          ]
+        }, done);
+    });
   })
 });

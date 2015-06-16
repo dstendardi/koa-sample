@@ -3,6 +3,7 @@ var koa = require('koa')
   , bodyParser = require('koa-bodyparser')
   , json = require('koa-json')
   , router = require('./lib/router')
+  , validator = require('koa-validator')
   , oneerror = require('koa-onerror');
 
 
@@ -14,6 +15,7 @@ oneerror(app);
 // generic middleware
 app.use(json());
 app.use(bodyParser());
+app.use(validator());
 
 // app middleware
 app.use(function *(next) {
