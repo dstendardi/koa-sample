@@ -23,6 +23,7 @@ describe('app', function () {
 
       request
         .get('/')
+        .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect({
@@ -35,4 +36,4 @@ describe('app', function () {
         }, done);
     })
   })
-})
+});

@@ -4,12 +4,11 @@ var koa = require('koa')
   , bodyParser = require('koa-bodyparser')
   , json = require('koa-json')
   , assert = require('assert')
+  , oneerror = require('koa-onerror')
   , Immutable = require('immutable');
 
 
 var app = module.exports = koa();
-
-
 require('require-all')({
   dirname: __dirname + '/controller'
   , filter: /(.+\-controller)\.js$/
@@ -37,6 +36,8 @@ require('require-all')({
   }
 });
 
+
+oneerror(app);
 app.use(function *(next) {
   this.api = request;
   yield next;
@@ -45,6 +46,7 @@ app.use(function *(next) {
 app.use(json());
 app.use(bodyParser());
 app.use(router.routes());
+
 
 
 app.listen(3000);
