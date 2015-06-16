@@ -9,6 +9,5 @@ module.exports['main'] = {
       "foo": this.api.get("/foo"),
       "bar": this.api.get("/bar")
     };
-
   }
 };
