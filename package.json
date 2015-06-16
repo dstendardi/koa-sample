@@ -9,11 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "immutable": "^3.7.3",
     "koa": "^0.21.0",
     "koa-bodyparser": "^2.0.0",
     "koa-json": "^1.1.1",
     "koa-router": "^5.1.2",
-    "request-promise": "^0.4.2"
+    "request-promise": "^0.4.2",
+    "require-all": "^1.1.0"
   },
   "devDependencies": {
     "mocha": "^2.2.5",

@@ -1,6 +1,7 @@
 var app = require('./app');
 var nock = require('nock');
-var request = require('supertest').agent(app.listen());
+var request = require('supertest')
+  .agent(app.listen());
 
 describe('app', function () {
 
