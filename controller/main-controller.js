@@ -6,8 +6,8 @@ module.exports['main'] = {
   },
   handler: function *() {
     this.body = yield {
-      "foo": this.api({method: "get", uri: "/foo"}),
-      "bar": this.api({mehtod: "get", uri: "/bar"})
+      "foo": this.api({uri: "/foo"}),
+      "bar": this.api({uri: "/bar"})
     };
   }
 };
