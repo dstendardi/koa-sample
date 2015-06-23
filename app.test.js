@@ -11,6 +11,7 @@ describe('app', function () {
 
       nock('http://localhost:4000')
         .get('/foo')
+        .matchHeader('Request-id', /.+/)
         .reply(200, {
           "foo": "bar"
         });
