@@ -4,10 +4,10 @@ module.exports['main'] = {
   validate: function *() {
     this.checkQuery('foo').notEmpty();
   },
-  handler: function *() {
+  handler: function *(api) {
     this.body = yield {
-      "foo": this.api({uri: "/foo"}),
-      "bar": this.api({uri: "/bar"})
+      "foo": api({uri: "/foo"}),
+      "bar": api({uri: "/bar"})
     };
   }
 };
