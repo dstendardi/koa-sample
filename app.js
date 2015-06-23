@@ -2,6 +2,7 @@ var koa = require('koa')
   , bodyParser = require('koa-bodyparser')
   , json = require('koa-json')
   , validator = require('koa-validator')
+  , requestId = require('koa-request-id')
   , router = require('./lib/router')
   , request = require('./lib/middleware/api-middleware')
   , measured = require('./lib/middleware/measured-middleware')
@@ -14,6 +15,7 @@ var app = module.exports = koa();
 oneerror(app);
 
 // generic middleware
+app.use(requestId());
 app.use(measured());
 app.use(json());
 app.use(bodyParser());
