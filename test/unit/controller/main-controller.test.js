@@ -1,4 +1,4 @@
-var app = require('./app');
+var app = require('../../../app');
 var nock = require('nock');
 var request = require('supertest')
   .agent(app.listen());
