@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.1.2",
     "fn-args": "^1.0.0",
     "immutable": "^3.7.3",
     "koa": "^0.21.0",
@@ -19,8 +20,10 @@
     "koa-router": "^5.1.2",
     "koa-validator": "^0.6.4",
     "measured": "^1.0.0",
+    "moment": "^2.10.3",
     "request-promise": "^0.4.2",
-    "require-all": "^1.1.0"
+    "require-all": "^1.1.0",
+    "string-template": "^0.2.1"
   },
   "devDependencies": {
     "mocha": "^2.2.5",

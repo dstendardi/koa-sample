@@ -6,16 +6,16 @@ var koa = require('koa')
   , router = require('./lib/router')
   , request = require('./lib/middleware/api-middleware')
   , measured = require('./lib/middleware/measured-middleware')
+  , logger = require('./lib/middleware/logger-middleware')
   , oneerror = require('koa-onerror');
 
 
 var app = module.exports = koa();
-
-// error handling
 oneerror(app);
 
 // generic middleware
 app.use(requestId());
+app.use(logger());
 app.use(measured());
 app.use(json());
 app.use(bodyParser());
