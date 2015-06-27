@@ -4,25 +4,24 @@ var koa = require('koa')
   , validator = require('koa-validator')
   , requestId = require('koa-request-id')
   , router = require('./lib/router')
-  , request = require('./lib/middleware/api-middleware')
+  , api = require('./lib/middleware/api-middleware')
   , measured = require('./lib/middleware/measured-middleware')
   , logger = require('./lib/middleware/logger-middleware')
-  , oneerror = require('koa-onerror');
-
+  , error = require('koa-error');
 
 var app = module.exports = koa();
-oneerror(app);
 
 // generic middleware
+app.use(error());
 app.use(requestId());
-app.use(logger());
+app.use(logger(app));
 app.use(measured());
 app.use(json());
 app.use(bodyParser());
 app.use(validator());
 
 // app middleware
-app.use(request({
+app.use(api({
   baseUrl: "http://localhost:4000"
 }));
 

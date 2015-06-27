@@ -57,4 +57,16 @@ describe('app', function () {
         }, done);
     });
   })
+
+  describe('when GET /exception', function () {
+
+    it('should log exception', function (done) {
+      request
+        .get('/exception')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(500)
+        .expect({ error: 'error message' }, done);
+    });
+  })
 });
