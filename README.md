@@ -63,9 +63,9 @@ Logging relays on console.log, following the [twelve factor principle](http://12
 ```js
 
 this.logger({
-  action: 'foo.bar',
+  type: 'foo.bar',
   preview: '{bar}',
-  data: {
+  fields: {
     'bar': 'foo'
   }
 });
@@ -81,9 +81,9 @@ In development, the preview attributes tells to the logger how to output extra p
 
 | attribute | type   | description                                         |
 |-----------|--------|-----------------------------------------------------|
-| action    | string | A simple name describing which aciton is performed  |
+| type      | string | A simple name describing which action is performed  |
 | preview   | string | How to render extra data in development environment |
-| data      | object | A map with specific data to add to the log entry    |
+| fields    | object | A map with specific data to add to the log entry    |
 
 ### Request correlation
 

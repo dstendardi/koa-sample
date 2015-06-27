@@ -27,6 +27,7 @@
     "string-template": "^0.2.1"
   },
   "devDependencies": {
+    "chai": "^3.0.0",
     "mocha": "^2.2.5",
     "nock": "^2.5.0",
     "supertest": "^1.0.1"

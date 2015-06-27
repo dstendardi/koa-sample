@@ -15,7 +15,7 @@ module.exports = {
   'exception': {
     path: '/exception',
     methods: ['get'],
-    handler: function *(api) {
+    handler: function *() {
       throw new Error("error message");
     }
   }
