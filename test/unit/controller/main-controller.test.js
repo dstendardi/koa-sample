@@ -56,7 +56,7 @@ describe('app', function () {
           ]
         }, done);
     });
-  })
+  });
 
   describe('when GET /exception', function () {
 
