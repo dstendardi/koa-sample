@@ -4,9 +4,11 @@ var koa = require('koa')
   , validator = require('koa-validator')
   , requestId = require('koa-request-id')
   , router = require('./lib/router')
+  , listen = require('./lib/listen')
   , api = require('./lib/middleware/api-middleware')
   , measured = require('./lib/middleware/measured-middleware')
   , logger = require('./lib/middleware/logger-middleware')
+  , transactionEvent = require('./lib/middleware/transaction-event-middleware')
   , error = require('koa-error');
 
 var app = module.exports = koa();
@@ -19,6 +21,7 @@ app.use(measured());
 app.use(json());
 app.use(bodyParser());
 app.use(validator());
+app.use(transactionEvent());
 
 // app middleware
 app.use(api({
@@ -29,5 +32,10 @@ app.use(api({
 var routes = router(__dirname + '/controller');
 
 app.use(routes);
+
+// listeners
+listen(app)
+  .add(__dirname + '/lib/listener/metric-listener')
+  .add(__dirname + '/lib/listener/logger-listener');
 
 if (!module.parent) app.listen(3000);
