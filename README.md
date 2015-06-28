@@ -85,10 +85,11 @@ In development, the preview attributes tells to the logger how to output extra p
 | preview   | string | How to render extra data in development environment |
 | fields    | object | A map with specific data to add to the log entry    |
 
-### Request correlation
 
+### Request correlation
 
 Because the logger middleware depends on [koa-request-id](https://github.com/segmentio/koa-request-id), the request id is automatically
 added to all log entries in the `id` property.
+
 
 
