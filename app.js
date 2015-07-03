@@ -8,7 +8,7 @@ var koa = require('koa')
   , api = require('./lib/middleware/api-middleware')
   , measured = require('./lib/middleware/measured-middleware')
   , logger = require('./lib/middleware/logger-middleware')
-  , transactionEvent = require('./lib/middleware/transaction-event-middleware')
+  , addEvents = require('./lib/middleware/add-event-middleware')
   , error = require('koa-error');
 
 var app = module.exports = koa();
@@ -21,7 +21,7 @@ app.use(measured());
 app.use(json());
 app.use(bodyParser());
 app.use(validator());
-app.use(transactionEvent());
+app.use(addEvents());
 
 // app middleware
 app.use(api({
