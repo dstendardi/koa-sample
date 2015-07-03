@@ -9,9 +9,15 @@ A basic implementation looks like this :
 
 ```js
 
+/**
+ * Note : validator is a middleware factory
+ * injected automatically by name.
+ * You are free to inject your own factories this way
+ */
 module.exports = function(validator) {
 
   return {
+    
     'main': {
       path: '/',
       methods: ['get'],
@@ -20,6 +26,11 @@ module.exports = function(validator) {
           this.checkQuery('foo').notEmpty();
         })
       ],
+      /**
+       * like middleware factory, you can inject
+       * any context-attached instance directly
+       * in your handler
+       */
       handler: function *(api) {
         this.body = yield {
           "foo": api({uri: "/foo"}),
