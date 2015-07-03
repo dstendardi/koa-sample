@@ -8,12 +8,6 @@ Controller is responsible for processing http requests and returning http respon
 A basic implementation looks like this :
 
 ```js
-
-/**
- * Note : validator is a middleware factory
- * injected automatically by name.
- * You are free to inject your own factories this way
- */
  
 // app.js
 app.use(api({ // register a global middleware
@@ -29,6 +23,9 @@ router({
 });
 
 // in controller/main-controller.js
+
+// geolocator is the function exported in  __dirname + '/lib/middleware/geolocator-middleware'
+// it must returns a koa compatible middleware
 module.exports = function(geolocator) {
 
   return {
