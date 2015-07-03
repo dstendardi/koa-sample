@@ -21,8 +21,11 @@ app.use(api({ // register a global middleware
 }));
 
 router({
-  controllerPaths: __dirname + '/controller'
-  middlewarePaths: __dirname + '/lib/middleware' // this option will register all middleware factories in this folder
+  controllerPaths: __dirname + '/controller',
+  // this option will register all middleware factories in this folder
+  // that match the naming conventions.
+  // Note : Your middleware factory must be suffixed by "-middleware"
+  middlewarePaths: __dirname + '/lib/middleware' 
 });
 
 // in controller/main-controller.js
