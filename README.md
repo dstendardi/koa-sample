@@ -9,29 +9,34 @@ A basic implementation looks like this :
 
 ```js
 
-module.exports['main'] = {
-  path: '/',
-  methods: ['get'],
-  validate: function *() {
-    this.checkQuery('foo').notEmpty();
-  },
-  handler: function *(api) {
-    this.body = yield {
-      "foo": api({uri: "/foo"}),
-      "bar": api({uri: "/bar"})
-    };
+module.exports = function(validator) {
+
+  return {
+    'main': {
+      path: '/',
+      methods: ['get'],
+      before: [
+        validator(function *() {
+          this.checkQuery('foo').notEmpty();
+        })
+      ],
+      handler: function *(api) {
+        this.body = yield {
+          "foo": api({uri: "/foo"}),
+          "bar": api({uri: "/bar"})
+        };
+      }
+    },
+    'exception': {
+      path: '/exception',
+      methods: ['get'],
+      handler: function *() {
+        throw new Error("error message");
+      }
+    }
   }
 };
 ```
-
-### API
-
-| attribute | type     | description                                         |
-|-----------|----------|-----------------------------------------------------|
-| handler   | Function | A generator responsible for the transaction         |
-| validate  | Function | A generator function responsible for validation     |
-| methods   | Array    | A list of http methods accepted for this route      |
-| path      | String   | The http request path that match the route          |
 
 
 ### Injection
@@ -76,14 +81,6 @@ In production, logs are serialized as json for machine processing (logstash, log
 In development, the preview attributes tells to the logger how to output extra parameters :
 
 ![](https://github.com/dstendardi/koa-sample/blob/master/doc/img/logging.png)
-
-### API
-
-| attribute | type   | description                                         |
-|-----------|--------|-----------------------------------------------------|
-| type      | string | A simple name describing which action is performed  |
-| preview   | string | How to render extra data in development environment |
-| fields    | object | A map with specific data to add to the log entry    |
 
 
 ### Request correlation
