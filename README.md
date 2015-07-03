@@ -25,7 +25,7 @@ router({
 
 *./lib/middleware/geolocator-middleware.js
 
-```
+```js
 module.exports = function () {
   return function *(next) {
     this.geolocation = // resolve your ip
