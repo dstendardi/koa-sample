@@ -45,6 +45,8 @@ module.exports = function(validator) {
 
 ### About Injection
 
+#### Avoid scoping boiler plate in your handler
+
 Middleware are automatically injected into handler function. This allow to avoid
 boiler plates related to function scoping and enhance testability
 
@@ -64,6 +66,43 @@ function * db(next) {
 }
 
 ```
+
+#### Use a specific middleware for a given route
+
+You can use a specific middleware in your routes without the need to hardcode
+require calls in your controller
+
+```js
+
+// app.js
+router({
+  controllerPaths: __dirname + '/controller'
+  middlewarePaths: __dirname + '/lib/middleware' // this option will register all middleware factories in this folder
+});
+
+// in controller/main-controller.js
+odule.exports = function(validator, geolocator) {
+
+  return {
+    'main': {
+      path: '/',
+      methods: ['get'],
+      before: [
+        geolocator() // returns a middleware responsible for ip lookup,
+        validator(function *() {
+          this.checkQuery('foo').notEmpty();
+        })
+      ],
+      handler: function *(api, geolocation) {
+        // geolocation now contains latitude and longitude 
+      }
+    }
+  }
+};
+```
+
+
+
 
 
 ## Logging
