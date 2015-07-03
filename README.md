@@ -23,7 +23,7 @@ router({
 });
 ```
 
-*./lib/middleware/geolocator-middleware.js
+*./lib/middleware/geolocator-middleware.js*
 
 ```js
 module.exports = function () {
