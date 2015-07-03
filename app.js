@@ -29,7 +29,9 @@ app.use(api({
 }));
 
 // routes
-var routes = router(__dirname + '/controller');
+var routes = router({
+  controllerPaths: __dirname + '/controller'
+});
 
 app.use(routes);
 
