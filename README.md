@@ -7,9 +7,9 @@ Demonstrate how a koa application can be assemble.
 Controller is responsible for processing http requests and returning http responses.
 A basic implementation looks like this :
 
+In `./app.js`
+
 ```js
- 
-// app.js
 app.use(api({ // register a global middleware
   baseUrl: "http://localhost:4000"
 }));
@@ -21,9 +21,11 @@ router({
   // Note : Your middleware factory must be suffixed by "-middleware"
   middlewarePaths: __dirname + '/lib/middleware' 
 });
+```
 
-// in controller/main-controller.js
+In `./controller/main-controller.js`
 
+```js
 // geolocator is the function exported in  __dirname + '/lib/middleware/geolocator-middleware'
 // it must returns a koa compatible middleware
 module.exports = function(geolocator) {
