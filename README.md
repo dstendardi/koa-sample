@@ -26,13 +26,6 @@ module.exports = function(validator) {
           "bar": api({uri: "/bar"})
         };
       }
-    },
-    'exception': {
-      path: '/exception',
-      methods: ['get'],
-      handler: function *() {
-        throw new Error("error message");
-      }
     }
   }
 };
