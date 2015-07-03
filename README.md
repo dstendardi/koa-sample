@@ -38,8 +38,8 @@ module.exports = function(geolocator) {
         geolocator() // returns a middleware responsible for ip lookup,
       ],
       handler: function *(api, geolocation) {
-        // is available globally
-        // geolocation now contains latitude and longitude 
+        // api is available globally because of app.use()
+        // geolocation is now available because it was registered for this route
       }
     }
   }
