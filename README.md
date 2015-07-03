@@ -43,7 +43,7 @@ module.exports = function(validator) {
 ```
 
 
-### Injection
+### About Injection
 
 Middleware are automatically injected into handler function. This allow to avoid
 boiler plates related to function scoping and enhance testability
@@ -55,8 +55,9 @@ function * db(next) {
   this.db = function () {}
 }
 
-// controller
-module.exports['main'] = {
+// route
+{
+  // db is injected using context.db
   handler: function *(db) {
     var obj = db.load(this.request.params.id)
   }
