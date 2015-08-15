@@ -2,14 +2,18 @@
 
 Demonstrate how a koa application can be assemble.
 
-## Controller
+## App
 
-Controller is responsible for processing http requests and returning http responses.
-A basic implementation looks like this :
-
-*./app.js*
+This example show how to set up an application 
+that register a shared api middleware and load
+all the routes located in `controllerPaths`
 
 ```js
+
+var koa = require('koa');
+var api = require('./lib/middleware/api-middleware');
+var app = module.exports = koa();
+
 app.use(api({ // register a global middleware
   baseUrl: "http://localhost:4000"
 }));
@@ -19,7 +23,11 @@ router({
 });
 ```
 
-*./controller/main-controller.js*
+
+## Controller
+
+Controller is responsible for processing http requests and returning http responses.
+A basic implementation looks like this :
 
 ```js
 var Joi = require('joi');
