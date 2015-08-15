@@ -32,7 +32,7 @@ module.exports = {
       }
     },
     handler: function *() {
-      this.api is available globally because of app.use()
+      // this.api is available globally because of app.use()
     }
   }
 };
@@ -66,4 +66,15 @@ Because the logger middleware depends on [koa-request-id](https://github.com/seg
 added to all log entries in the `id` property.
 
 
+## Metrics
+
+The following metrics are available out of the box :
+
+| Metric collection | Metric key                          |
+| ------------------| ----------------------------------- |
+| api               | error                               |
+| api               | response.{status}                   |
+| server            | http-request.{method}               |
+| server            | http-response.{status}              |
+| app               | error.validation.{route}.{location} |
 
