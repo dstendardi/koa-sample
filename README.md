@@ -16,47 +16,27 @@ app.use(api({ // register a global middleware
 
 router({
   controllerPaths: __dirname + '/controller',
-  // this option will register all middleware factories in this folder
-  // that match the naming conventions.
-  // Note : Your middleware factory must be suffixed by "-middleware"
-  middlewarePaths: __dirname + '/lib/middleware' 
 });
-```
-
-*./lib/middleware/geolocator-middleware.js*
-
-```js
-module.exports = function () {
-  return function *(next) {
-    this.geolocation = // resolve your ip
-    yield next
-  }
-}
 ```
 
 *./controller/main-controller.js*
 
 ```js
-// geolocator is the function exported in  __dirname + '/lib/middleware/geolocator-middleware'
-// it must returns a koa compatible middleware
-module.exports = function(geolocator) {
-
-  return {
-    'main': {
-      path: '/',
-      methods: ['get'],
-      before: [
-        geolocator() // returns a middleware responsible for ip lookup,
-      ],
-      handler: function *(api, geolocation) {
-        // api is available globally because of app.use()
-        // geolocation is now available because it was registered for this route
+module.exports = {
+  'main': {
+    path: '/',
+    methods: ['get'],
+    validate: {
+      query: {
+        foo: Joi.string().required()
       }
+    },
+    handler: function *() {
+      this.api is available globally because of app.use()
     }
   }
 };
 ```
-
 
 ## Logging
 

@@ -45,15 +45,16 @@ describe('app', function () {
         .query({foo: ''})
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(200)
+        .expect(400)
         .expect({
-          "errors": [
-            {
-              "msg": "Invalid value",
-              "param": "foo",
-              "value": ""
+          query: [{
+            message: '"foo" is not allowed to be empty',
+            path: 'foo',
+            type: 'any.empty',
+            context: {
+              key: 'foo'
             }
-          ]
+          }]
         }, done);
     });
   });

@@ -1,27 +1,26 @@
-module.exports = function(validator) {
+var Joi = require('joi');
 
-  return {
-    'main': {
-      path: '/',
-      methods: ['get'],
-      before: [
-        validator(function *() {
-          this.checkQuery('foo').notEmpty();
-        })
-      ],
-      handler: function *(api) {
-        this.body = yield {
-          "foo": api({uri: "/foo"}),
-          "bar": api({uri: "/bar"})
-        };
+module.exports = {
+  'main': {
+    path: '/',
+    methods: ['get'],
+    validate: {
+      query: {
+        foo: Joi.string().required()
       }
     },
-    'exception': {
-      path: '/exception',
-      methods: ['get'],
-      handler: function *() {
-        throw new Error("error message");
-      }
+    handler: function *() {
+      this.body = yield {
+        "foo": this.api({uri: "/foo"}),
+        "bar": this.api({uri: "/bar"})
+      };
+    }
+  },
+  'exception': {
+    path: '/exception',
+    methods: ['get'],
+    handler: function *() {
+      throw new Error("error message");
     }
   }
 };
