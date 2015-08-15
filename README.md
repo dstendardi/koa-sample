@@ -22,6 +22,8 @@ router({
 *./controller/main-controller.js*
 
 ```js
+var Joi = require('joi');
+
 module.exports = {
   'main': {
     path: '/',
